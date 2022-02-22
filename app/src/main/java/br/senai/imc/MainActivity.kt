@@ -1,5 +1,6 @@
 package br.senai.imc
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,8 +35,15 @@ class MainActivity : AppCompatActivity() {
                 val valorIMC = calcularIMC(peso, altura)
                 val situacaoIMC = determinarStatusIMC(valorIMC)
 
-                statusContainer.text = "Seu IMC é: " + dec.format(valorIMC)
-                mensagemContainer.text = situacaoIMC
+//                statusContainer.text = "Seu IMC é: " + dec.format(valorIMC)
+//                mensagemContainer.text = situacaoIMC
+
+                val intent = Intent(this, ResultadoActivity::class.java)
+                intent.putExtra("altura", altura.toString())
+                intent.putExtra("peso", peso.toString())
+                intent.putExtra("imc", dec.format(valorIMC).toString())
+                intent.putExtra("status", situacaoIMC)
+                startActivity(intent)
             }
 
         }
